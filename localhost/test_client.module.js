@@ -6,23 +6,19 @@ import {
 //./readme.md:start
 //md: # import lib
 import {
-    f_n_minutes_timezone_offset_daylight_saving_time,
     f_b_daylight_saving_time,
-    f_s_isotimezone_from_s_timezone,
-    f_o_utc_date_components_from_n_ts_ms_and_s_timezone,
-    f_s_ymd,
-    f_s_dmy,
-    f_s_hms,
-    f_s_ymd_hms,
-    f_s_ts_formatted_from_o_utc_date_components,
-    f_s_ts_formatted, 
+    f_s_isotimezone__from_s_timezone,
+    f_s_ymd__from_n_ts_ms_utc,
+    f_s_dmy__from_n_ts_ms_utc,
+    f_s_hms__from_n_ts_ms_utc,
+    f_s_ymd_hms__from_n_ts_ms_utc,
     f_n_ms_offset_from_s_timezone_n_ts_ms
 } from "./client.module.js"
 // } from "https://deno.land/x/web_datepicker@[version]/mod.js"
 //md: # search a timezone and get iso string
-f_deno_test("f_s_isotimezone_from_s_timezone", () => {
+f_deno_test("f_s_isotimezone__from_s_timezone", () => {
     f_assert_equals(
-        f_s_isotimezone_from_s_timezone('Zurich'),
+        f_s_isotimezone__from_s_timezone('Zurich'),
         'Europe/Zurich'
     );
 
@@ -64,7 +60,7 @@ let n_ts_ms_utc__2023_06_06_13_14_32 = 1686057272545;
 
 f_deno_test("f_s_ymd__utc", () => {
     f_assert_equals(
-        f_s_ymd(
+        f_s_ymd__from_n_ts_ms_utc(
             n_ts_ms_utc__2023_06_06_13_14_32, 
             'UTC'
         ),
@@ -73,7 +69,7 @@ f_deno_test("f_s_ymd__utc", () => {
 });
 f_deno_test("f_s_hms__utc", () => {
     f_assert_equals(
-        f_s_hms(
+        f_s_hms__from_n_ts_ms_utc(
             n_ts_ms_utc__2023_06_06_13_14_32, 
             'UTC'
         ),
@@ -82,7 +78,7 @@ f_deno_test("f_s_hms__utc", () => {
 });
 f_deno_test("f_s_ymd_hms__utc", () => {
     f_assert_equals(
-        f_s_ymd_hms(
+        f_s_ymd_hms__from_n_ts_ms_utc(
             n_ts_ms_utc__2023_06_06_13_14_32, 
             'UTC'
         ),
@@ -92,7 +88,7 @@ f_deno_test("f_s_ymd_hms__utc", () => {
 
 f_deno_test("f_s_ymd", () => {
     f_assert_equals(
-        f_s_ymd(
+        f_s_ymd__from_n_ts_ms_utc(
             n_ts_ms_utc__2023_06_06_13_14_32, 
             'Europe/Zurich'
         ),
@@ -101,7 +97,7 @@ f_deno_test("f_s_ymd", () => {
 });
 f_deno_test("f_s_hms", () => {
     f_assert_equals(
-        f_s_hms(
+        f_s_hms__from_n_ts_ms_utc(
             n_ts_ms_utc__2023_06_06_13_14_32, 
             'Europe/Zurich'
         ),
@@ -110,11 +106,21 @@ f_deno_test("f_s_hms", () => {
 });
 f_deno_test("f_s_ymd_hms", () => {
     f_assert_equals(
-        f_s_ymd_hms(
+        f_s_ymd_hms__from_n_ts_ms_utc(
             n_ts_ms_utc__2023_06_06_13_14_32, 
             'Europe/Zurich'
         ),
         '2023-06-06 15:14:32'
+    );
+});
+
+f_deno_test("f_s_dmy", () => {
+    f_assert_equals(
+        f_s_dmy__from_n_ts_ms_utc(
+            n_ts_ms_utc__2023_06_06_13_14_32, 
+            'Europe/Zurich'
+        ),
+        '06-06-2023'
     );
 });
 

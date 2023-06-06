@@ -27,7 +27,6 @@ class O_utc_date_components{
 }
 
 
-
 let f_n_minutes_timezone_offset_daylight_saving_time = function(
     o_date
 ){
@@ -45,7 +44,7 @@ let f_b_daylight_saving_time = function(
     return o_date.getTimezoneOffset() < f_n_minutes_timezone_offset_daylight_saving_time(o_date);
 }
 
-let f_s_isotimezone_from_s_timezone = function(
+let f_s_isotimezone__from_s_timezone = function(
     s_timezone
 ){
     let a_s_timezone = [
@@ -72,7 +71,7 @@ let f_n_ms_offset_from_s_timezone_n_ts_ms =  function(
 ){
     let o_date = new Date(n_ts_ms)
     let s_timezone_greenwich_gmt_plus_zero = "UTC"
-    let s_isotimezone = f_s_isotimezone_from_s_timezone(s_timezone);
+    let s_isotimezone = f_s_isotimezone__from_s_timezone(s_timezone);
     let n_ts_ms_utc = new Date(o_date.toLocaleString('ISO', {timeZone: s_timezone_greenwich_gmt_plus_zero})).getTime()
     let n_ts_ms_lt = new Date(o_date.toLocaleString('ISO', {timeZone: s_isotimezone})).getTime()
     let n_ms_diff = n_ts_ms_lt - n_ts_ms_utc;
@@ -80,7 +79,7 @@ let f_n_ms_offset_from_s_timezone_n_ts_ms =  function(
 }
 
 
-let f_o_utc_date_components_from_n_ts_ms_and_s_timezone = function(
+let f_o_utc_date_components__from_n_ts_ms_and_s_timezone = function(
     n_ts_ms, 
     s_timezone
 ){
@@ -99,41 +98,41 @@ let f_o_utc_date_components_from_n_ts_ms_and_s_timezone = function(
 
     return o_utc_date_components
 }
-let f_s_ymd = function(
+let f_s_ymd__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
     if(!s_timezone){
         console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
     }
-    return f_o_utc_date_components_from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_ymd
+    return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_ymd
 }
-let f_s_dmy = function(
+let f_s_dmy__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
     if(!s_timezone){
         console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
     }
-    return f_o_utc_date_components_from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_dmy 
+    return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_dmy 
 }
-let f_s_hms = function(
+let f_s_hms__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
     if(!s_timezone){
         console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
     }
-    return f_o_utc_date_components_from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_hms 
+    return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_hms 
 }
-let f_s_ymd_hms = function(
+let f_s_ymd_hms__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
-    return f_o_utc_date_components_from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_ymd_hms 
+    return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_ymd_hms 
 }
 
-let f_s_ts_formatted_from_o_utc_date_components = function(
+let f_s_ts_formatted__from_o_utc_date_components = function(
     o_utc_date_components, 
     s_ts_format = '${n_year}-{n_month_zeropadded}-${n_minutes.toFixed(2)}'
 ){
@@ -158,28 +157,24 @@ let f_s_ts_formatted = function(
     s_timezone, 
     s_ts_format
 ){
-    let o_utc_date_components = f_o_utc_date_components_from_n_ts_ms_and_s_timezone(
+    let o_utc_date_components = f_o_utc_date_components__from_n_ts_ms_and_s_timezone(
         n_ts_ms, 
         s_timezone
     )
-    return f_s_ts_formatted_from_o_utc_date_components(
+    return f_s_ts_formatted__from_o_utc_date_components(
         o_utc_date_components, 
         s_ts_format
     )
 }
 
 
-
 export {
-    f_n_minutes_timezone_offset_daylight_saving_time,
     f_b_daylight_saving_time,
-    f_s_isotimezone_from_s_timezone,
-    f_o_utc_date_components_from_n_ts_ms_and_s_timezone,
-    f_s_ymd,
-    f_s_dmy,
-    f_s_hms,
-    f_s_ymd_hms,
-    f_s_ts_formatted_from_o_utc_date_components,
+    f_s_isotimezone__from_s_timezone,
+    f_s_ymd__from_n_ts_ms_utc,
+    f_s_dmy__from_n_ts_ms_utc,
+    f_s_hms__from_n_ts_ms_utc,
+    f_s_ymd_hms__from_n_ts_ms_utc,
     f_s_ts_formatted,
     f_n_ms_offset_from_s_timezone_n_ts_ms
 }
