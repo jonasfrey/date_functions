@@ -86,9 +86,9 @@ let f_o_utc_date_components__from_n_ts_ms_and_s_timezone = function(
     if(n_ts_ms instanceof Date){
         n_ts_ms = n_ts_ms.getTime()
     }
-    if(!s_timezone){
-        console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
-    }
+    // if(!s_timezone){
+    //     console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
+    // }
     let n_ms_offset = f_n_ms_offset_from_s_timezone_n_ts_ms(s_timezone, new Date(n_ts_ms));
     
     let n_ts_ms_with_offset = n_ts_ms + n_ms_offset; 
@@ -102,27 +102,27 @@ let f_s_ymd__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
-    if(!s_timezone){
-        console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
-    }
+    // if(!s_timezone){
+    //     console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
+    // }
     return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_ymd
 }
 let f_s_dmy__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
-    if(!s_timezone){
-        console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
-    }
+    // if(!s_timezone){
+    //     console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
+    // }
     return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_dmy 
 }
 let f_s_hms__from_n_ts_ms_utc = function(
     n_ts_ms, 
     s_timezone
 ){
-    if(!s_timezone){
-        console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
-    }
+    // if(!s_timezone){
+    //     console.error(`please provide a timezone, (default is ${Intl.DateTimeFormat().resolvedOptions().timeZone})`)
+    // }
     return f_o_utc_date_components__from_n_ts_ms_and_s_timezone(n_ts_ms, s_timezone).s_hms 
 }
 let f_s_ymd_hms__from_n_ts_ms_utc = function(
