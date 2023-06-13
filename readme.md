@@ -1,4 +1,4 @@
-<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Tue Jun 13 2023 15:02:58 GMT+0200 (Central European Summer Time)","n_ts_created":1686661378498} -->
+<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Tue Jun 13 2023 15:09:02 GMT+0200 (Central European Summer Time)","n_ts_created":1686661742257} -->
 # import libs
 ```javascript
 
@@ -18,6 +18,12 @@ import {
     f_s_ymd_hms__from_n_ts_ms_utc,
     f_n_ms_offset_from_s_timezone_n_ts_ms
 } from "./client.module.js"
+
+```
+# usage
+(just ignore the 'f_deno_test stuff')
+```javascript
+
 
 let n_ts_ms_utc__2023_06_06_13_14_32 = 1686057272545;
 await f_deno_test_all_and_print_summary(
