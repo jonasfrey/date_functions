@@ -72,8 +72,8 @@ let f_n_ms_offset_from_s_timezone_n_ts_ms =  function(
     let o_date = new Date(n_ts_ms)
     let s_timezone_greenwich_gmt_plus_zero = "UTC"
     let s_isotimezone = f_s_isotimezone__from_s_timezone(s_timezone);
-    let n_ts_ms_utc = new Date(o_date.toLocaleString('ISO', {timeZone: s_timezone_greenwich_gmt_plus_zero})).getTime()
-    let n_ts_ms_lt = new Date(o_date.toLocaleString('ISO', {timeZone: s_isotimezone})).getTime()
+    let n_ts_ms_utc = new Date(o_date.toLocaleString('en-US', {timeZone: s_timezone_greenwich_gmt_plus_zero})).getTime()
+    let n_ts_ms_lt = new Date(o_date.toLocaleString('en-US', {timeZone: s_isotimezone})).getTime()
     let n_ms_diff = n_ts_ms_lt - n_ts_ms_utc;
     return n_ms_diff
 }
