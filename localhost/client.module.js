@@ -166,8 +166,121 @@ let f_s_ts_formatted = function(
         s_ts_format
     )
 }
+class O_ts_range{
+    constructor(
+        n_ts_ms_utc__start,
+        n_ts_ms_utc__end,
+    ){
+        this.n_ts_ms_utc__start = n_ts_ms_utc__start
+        this.n_ts_ms_utc__end = n_ts_ms_utc__end
+        this.s_ts_ymd_hms_ut__start = f_s_ymd_hms__from_n_ts_ms_utc(n_ts_ms_utc__start, 'UTC')
+        this.s_ts_ymd_hms_ut__end = f_s_ymd_hms__from_n_ts_ms_utc(n_ts_ms_utc__end, 'UTC')
+    }
+}
+let f_o_ts_range__day__from_n_ts_ms_utc = function(
+    n_ts_ms_utc
+){
 
+    let n_ts_ms_utc__limit_start = 0;
+    let n_ts_ms_utc__limit_end = 0;
+    let o_date = new Date(n_ts_ms_utc);
+    o_date = new Date(o_date.setUTCHours(0))
+    o_date = new Date(o_date.setUTCMinutes(0))
+    o_date = new Date(o_date.setUTCSeconds(0))
+    n_ts_ms_utc__limit_start = o_date.getTime()
+    o_date = new Date(o_date.setUTCHours(23))
+    o_date = new Date(o_date.setUTCMinutes(59))
+    o_date = new Date(o_date.setUTCSeconds(59))
+    n_ts_ms_utc__limit_end = o_date.getTime() + 1 * 1000
+    return new O_ts_range(
+        n_ts_ms_utc__limit_start, 
+        n_ts_ms_utc__limit_end
+    )
 
+}
+
+let f_o_ts_range__week__from_n_ts_ms_utc = function(
+    n_ts_ms_utc
+){
+
+    let n_ts_ms_utc__limit_start = 0;
+    let n_ts_ms_utc__limit_end = 0;
+    let o_date = new Date(n_ts_ms_utc);
+
+    let n_idx_day_in_week = o_date.getUTCDay()
+    let n_day_in_month = o_date.getUTCDate(); 
+    let n_diff_days_week_start = n_idx_day_in_week;
+    let n_diff_days_week_end = 7 - n_idx_day_in_week;
+    o_date = new Date(o_date.setUTCDate(n_day_in_month-(n_diff_days_week_start-1)))
+    o_date = new Date(o_date.setUTCHours(0))
+    o_date = new Date(o_date.setUTCMinutes(0))
+    o_date = new Date(o_date.setUTCSeconds(0))
+    n_ts_ms_utc__limit_start = o_date.getTime()
+    o_date = new Date(o_date.setUTCDate(n_day_in_month+n_diff_days_week_end))
+    o_date = new Date(o_date.setUTCHours(23))
+    o_date = new Date(o_date.setUTCMinutes(59))
+    o_date = new Date(o_date.setUTCSeconds(59))
+    n_ts_ms_utc__limit_end = o_date.getTime() + 1 * 1000
+    return new O_ts_range(
+        n_ts_ms_utc__limit_start, 
+        n_ts_ms_utc__limit_end
+    )
+
+}
+let f_o_ts_range__month__from_n_ts_ms_utc = function(
+    n_ts_ms_utc
+){
+
+    let n_ts_ms_utc__limit_start = 0;
+    let n_ts_ms_utc__limit_end = 0;
+    let o_date = new Date(n_ts_ms_utc);
+
+    let n_idx_month = o_date.getUTCMonth();
+    o_date = new Date(o_date.setDate(1))
+    o_date = new Date(o_date.setUTCHours(0))
+    o_date = new Date(o_date.setUTCMinutes(0))
+    o_date = new Date(o_date.setUTCSeconds(0))
+    n_ts_ms_utc__limit_start = o_date.getTime()
+    o_date = new Date(o_date.setUTCMonth(n_idx_month+1))
+    o_date = new Date(o_date.setDate(0))
+    o_date = new Date(o_date.setUTCHours(0))
+    o_date = new Date(o_date.setUTCMinutes(0))
+    o_date = new Date(o_date.setUTCSeconds(0))
+    n_ts_ms_utc__limit_end = o_date.getTime() 
+    return new O_ts_range(
+        n_ts_ms_utc__limit_start, 
+        n_ts_ms_utc__limit_end
+    )
+
+}
+let f_o_ts_range__year__from_n_ts_ms_utc = function(
+    n_ts_ms_utc
+){
+
+    let n_ts_ms_utc__limit_start = 0;
+    let n_ts_ms_utc__limit_end = 0;
+    let o_date = new Date(n_ts_ms_utc);
+
+    let n_utc_full_year = o_date.getUTCFullYear();
+    o_date = new Date(o_date.setUTCMonth(0))
+    o_date = new Date(o_date.setDate(1))
+    o_date = new Date(o_date.setUTCHours(0))
+    o_date = new Date(o_date.setUTCMinutes(0))
+    o_date = new Date(o_date.setUTCSeconds(0))
+    n_ts_ms_utc__limit_start = o_date.getTime()
+    o_date = new Date(o_date.setUTCFullYear(n_utc_full_year+1))
+    o_date = new Date(o_date.setUTCMonth(0))
+    o_date = new Date(o_date.setDate(1))
+    o_date = new Date(o_date.setUTCHours(0))
+    o_date = new Date(o_date.setUTCMinutes(0))
+    o_date = new Date(o_date.setUTCSeconds(0))
+    n_ts_ms_utc__limit_end = o_date.getTime() 
+    return new O_ts_range(
+        n_ts_ms_utc__limit_start, 
+        n_ts_ms_utc__limit_end
+    )
+
+}
 export {
     f_b_daylight_saving_time,
     f_s_isotimezone__from_s_timezone,
@@ -176,5 +289,9 @@ export {
     f_s_hms__from_n_ts_ms_utc,
     f_s_ymd_hms__from_n_ts_ms_utc,
     f_s_ts_formatted,
-    f_n_ms_offset_from_s_timezone_n_ts_ms
+    f_n_ms_offset_from_s_timezone_n_ts_ms, 
+    f_o_ts_range__day__from_n_ts_ms_utc,
+    f_o_ts_range__week__from_n_ts_ms_utc,
+    f_o_ts_range__month__from_n_ts_ms_utc, 
+    f_o_ts_range__year__from_n_ts_ms_utc
 }
