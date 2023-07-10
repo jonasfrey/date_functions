@@ -1,4 +1,4 @@
-<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Fri Jul 07 2023 17:28:42 GMT+0200 (Central European Summer Time)","n_ts_created":1688743722502} -->
+<!-- {"s_msg":"this file was automatically generated","s_by":"f_generate_markdown.module.js","s_ts_created":"Tue Jul 11 2023 00:27:53 GMT+0200 (Central European Summer Time)","n_ts_created":1689028073099} -->
 # import libs
 ```javascript
 
@@ -151,7 +151,7 @@ await f_deno_test_all_and_print_summary(
         }),
 
 ```
-# get a O_ts_range object ({n_ts_ms_utc__start:...,n_ts_ms_utc__end:..., ...})
+# get a O_ts_range object ({n_ts_ms_ut__start:...,n_ts_ms_ut__end:..., ...})
 you can get a specific time range from n_ts_ms_ut
 for example the start of the month and the end of the month,
 ```javascript
@@ -161,8 +161,8 @@ for example the start of the month and the end of the month,
             let o_ts_range = f_o_ts_range__day__from_n_ts_ms_utc(
                 n_ts_ms
             );
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
                 '2023-07-07 00:00:00', 
@@ -177,8 +177,8 @@ for example the start of the month and the end of the month,
             let o_ts_range = f_o_ts_range__week__from_n_ts_ms_utc(
                 n_ts_ms
             );
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
                 '2022-12-26 00:00:00', 
@@ -193,8 +193,8 @@ for example the start of the month and the end of the month,
             let o_ts_range = f_o_ts_range__month__from_n_ts_ms_utc(
                 n_ts_ms
             );
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
                 '2024-02-01 00:00:00', 
@@ -210,8 +210,8 @@ for example the start of the month and the end of the month,
                 n_ts_ms
             );
             // console.log(o_ts_range)
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
 
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),

@@ -138,7 +138,7 @@ await f_deno_test_all_and_print_summary(
             );
         }),
 
-        //md: # get a O_ts_range object ({n_ts_ms_utc__start:...,n_ts_ms_utc__end:..., ...})
+        //md: # get a O_ts_range object ({n_ts_ms_ut__start:...,n_ts_ms_ut__end:..., ...})
         //md: you can get a specific time range from n_ts_ms_ut
         //md: for example the start of the month and the end of the month,
 
@@ -147,8 +147,8 @@ await f_deno_test_all_and_print_summary(
             let o_ts_range = f_o_ts_range__day__from_n_ts_ms_utc(
                 n_ts_ms
             );
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
                 '2023-07-07 00:00:00', 
@@ -163,8 +163,8 @@ await f_deno_test_all_and_print_summary(
             let o_ts_range = f_o_ts_range__week__from_n_ts_ms_utc(
                 n_ts_ms
             );
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
                 '2022-12-26 00:00:00', 
@@ -179,8 +179,8 @@ await f_deno_test_all_and_print_summary(
             let o_ts_range = f_o_ts_range__month__from_n_ts_ms_utc(
                 n_ts_ms
             );
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
                 '2024-02-01 00:00:00', 
@@ -196,8 +196,8 @@ await f_deno_test_all_and_print_summary(
                 n_ts_ms
             );
             // console.log(o_ts_range)
-            let o_start = new Date(o_ts_range.n_ts_ms_utc__start);
-            let o_end = new Date(o_ts_range.n_ts_ms_utc__end);
+            let o_start = new Date(o_ts_range.n_ts_ms_ut__start);
+            let o_end = new Date(o_ts_range.n_ts_ms_ut__end);
 
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_start.getTime(), 'UTC'),
