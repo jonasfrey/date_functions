@@ -293,5 +293,6 @@ export {
     f_o_ts_range__day__from_n_ts_ms_utc,
     f_o_ts_range__week__from_n_ts_ms_utc,
     f_o_ts_range__month__from_n_ts_ms_utc, 
-    f_o_ts_range__year__from_n_ts_ms_utc
+    f_o_ts_range__year__from_n_ts_ms_utc, 
+    O_ts_range
 }
