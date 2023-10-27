@@ -166,6 +166,7 @@ let f_s_ts_formatted = function(
         s_ts_format
     )
 }
+
 class O_ts_range{
     constructor(
         n_ts_ms_ut__start,
@@ -281,6 +282,54 @@ let f_o_ts_range__year__from_n_ts_ms_utc = function(
     )
 
 }
+let f_s_timestring_from_n_ms = function(
+    n_ms, 
+    n_digits_after_decimal_point = 2, 
+    a_s_milliseconds_s_seconds_s_minutes_s_hours_s_days = [
+        'Milliseconds', 
+        'Seconds', 
+        'Minutes', 
+        'Hours', 
+        'Days', 
+    ]
+){
+    //returns a timestring in a human readable format, 
+    // eg. 33 milliseconds, 58.2 seconds, 2.17 minutes, 1.2 hours, 
+    let n_sec = (n_ms / 1000)
+    let n_min = (n_ms / 1000 / 60 )
+    let n_hours = (n_ms / 1000 / 60 / 60)
+    let n_days = (n_ms / 1000 / 60 / 60 / 24)
+    
+    if(n_sec < 1){
+        return [
+            `${n_ms.toFixed(n_digits_after_decimal_point)}`,
+            a_s_milliseconds_s_seconds_s_minutes_s_hours_s_days[0]
+        ].join(' ')
+    }
+    if(n_min < 1){
+        return [
+            `${n_sec.toFixed(n_digits_after_decimal_point)}`,
+            a_s_milliseconds_s_seconds_s_minutes_s_hours_s_days[1]
+        ].join(' ')
+    }
+    if(n_hours < 1){
+        return [
+            `${n_min.toFixed(n_digits_after_decimal_point)}`,
+            a_s_milliseconds_s_seconds_s_minutes_s_hours_s_days[2]
+        ].join(' ')
+    }
+    if(n_days < 1){
+        return [
+            `${n_hours.toFixed(n_digits_after_decimal_point)}`,
+            a_s_milliseconds_s_seconds_s_minutes_s_hours_s_days[3]
+        ].join(' ')
+    }
+    return [
+        `${n_days.toFixed(n_digits_after_decimal_point)}`,
+        a_s_milliseconds_s_seconds_s_minutes_s_hours_s_days[4]
+    ].join(' ')
+}
+
 export {
     f_b_daylight_saving_time,
     f_s_isotimezone__from_s_timezone,
@@ -294,5 +343,6 @@ export {
     f_o_ts_range__week__from_n_ts_ms_utc,
     f_o_ts_range__month__from_n_ts_ms_utc, 
     f_o_ts_range__year__from_n_ts_ms_utc, 
+    f_s_timestring_from_n_ms,
     O_ts_range
 }

@@ -20,8 +20,9 @@ import {
     f_o_ts_range__day__from_n_ts_ms_utc,
     f_o_ts_range__week__from_n_ts_ms_utc,
     f_o_ts_range__month__from_n_ts_ms_utc,
-    f_o_ts_range__year__from_n_ts_ms_utc
-} from "./client.module.js"
+    f_o_ts_range__year__from_n_ts_ms_utc,
+    f_s_timestring_from_n_ms
+} from "./module.js"
 
 //md: # usage 
 //md: (just ignore the 'f_deno_test stuff') 
@@ -206,6 +207,58 @@ await f_deno_test_all_and_print_summary(
             f_assert_equals(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_end.getTime(), 'UTC'),
                 '2024-01-01 00:00:00', //2024 is switchyear that occurs every 4 years so february has 29 days instead of 28
+            )
+            
+        }),
+        
+        f_deno_test("f_s_timestring_from_n_ms", () => {
+            f_assert_equals(
+                f_s_timestring_from_n_ms(12, 1),
+                '12.0 Milliseconds',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000, 1),
+                '1.2 Seconds',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000*60, 1),
+                '1.2 Minutes',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000*60*60, 1),
+                '1.2 Hours',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000*60*60*24, 1),
+                '1.2 Days',
+            )
+
+            let a_s_name_german = [
+                'Millisekunden', 
+                'Sekunden',
+                'Minuten', 
+                'Stunden', 
+                'Tage'
+            ]
+            f_assert_equals(
+                f_s_timestring_from_n_ms(12, 1, a_s_name_german),
+                '12.0 Millisekunden',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000, 1, a_s_name_german),
+                '1.2 Sekunden',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000*60, 1, a_s_name_german),
+                '1.2 Minuten',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000*60*60, 1, a_s_name_german),
+                '1.2 Stunden',
+            )
+            f_assert_equals(
+                f_s_timestring_from_n_ms(1.2*1000*60*60*24, 1, a_s_name_german),
+                '1.2 Tage',
             )
             
         }),
