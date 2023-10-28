@@ -21,34 +21,41 @@ import {
     f_o_ts_range__week__from_n_ts_ms_utc,
     f_o_ts_range__month__from_n_ts_ms_utc,
     f_o_ts_range__year__from_n_ts_ms_utc,
-    f_s_timestring_from_n_ms
+    f_s_timestring_from_n_ms,
+    f_measure_time
 } from "./module.js"
 
 //md: # usage 
-//md: (just ignore the 'f_deno_test stuff') 
+//./readme.md:end
 
 
 let n_ts_ms_utc__2023_06_06_13_14_32 = 1686057272545;
 await f_deno_test_all_and_print_summary(
     [
-        //md: # search a timezone and get iso string
         f_deno_test("f_s_isotimezone__from_s_timezone", () => {
+            //./readme.md:start
+            //md: # search a timezone and get iso string
             f_assert_equals(
                 f_s_isotimezone__from_s_timezone('Zurich'),
                 'Europe/Zurich'
-            );
+                );
+            //./readme.md:end
         }),
-        //md: # check if daylight saving time is on (check if 'summertime' is on)
+        
         f_deno_test("f_b_daylight_saving_time", () => {
+            //./readme.md:start
+            //md: # check if daylight saving time is on (check if 'summertime' is on)
             f_assert_equals(
                 f_b_daylight_saving_time(new Date("2023-06-01 10:20:20")),
                 true
-            );
+                );
+            //./readme.md:end
 
         }),
-        //md: # get the timeoffset from a timezone 
         f_deno_test("f_n_ms_offset_from_s_timezone_n_ts_ms__daylight_saving_time", () => {
-
+            
+            //./readme.md:start
+            //md: # get the timeoffset from a timezone 
             f_assert_equals(
                 f_n_ms_offset_from_s_timezone_n_ts_ms(
                     'Europe/Zurich', 
@@ -56,11 +63,14 @@ await f_deno_test_all_and_print_summary(
                 ),
                 2*60*60*1000
             );
+            //./readme.md:end
+
 
         }),
-        //md: # get the timeoffset from a timezone (in winter it is one hour less)
         f_deno_test("f_n_ms_offset_from_s_timezone_n_ts_ms", () => {
-
+            
+            //./readme.md:start
+            //md: # get the timeoffset from a timezone (in winter it is one hour less)
             f_assert_equals(
                 f_n_ms_offset_from_s_timezone_n_ts_ms(
                     'Europe/Zurich', 
@@ -68,12 +78,14 @@ await f_deno_test_all_and_print_summary(
                 ),
                 1*60*60*1000
             );
+            //./readme.md:end
 
         }),
-        //md: # convert a date to YYYY-MM-DD HH:II:SS (by providing a timezone)
-
-
+        
+        
         f_deno_test("f_s_ymd__utc", () => {
+            //./readme.md:start
+            //md: # convert a date to YYYY-MM-DD HH:II:SS (by providing a timezone)
             f_assert_equals(
                 f_s_ymd__from_n_ts_ms_utc(
                     n_ts_ms_utc__2023_06_06_13_14_32, 
@@ -81,6 +93,7 @@ await f_deno_test_all_and_print_summary(
                 ),
                 '2023-06-06'
             );
+            //./readme.md:end
         }),
         f_deno_test("f_s_hms__utc", () => {
             f_assert_equals(
@@ -139,11 +152,12 @@ await f_deno_test_all_and_print_summary(
             );
         }),
 
-        //md: # get a O_ts_range object ({n_ts_ms_ut__start:...,n_ts_ms_ut__end:..., ...})
-        //md: you can get a specific time range from n_ts_ms_ut
-        //md: for example the start of the month and the end of the month,
-
+        
         f_deno_test("f_o_ts_range__day__from_n_ts_ms_utc", () => {
+            //./readme.md:start
+            //md: # get a O_ts_range object ({n_ts_ms_ut__start:...,n_ts_ms_ut__end:..., ...})
+            //md: you can get a specific time range from n_ts_ms_ut
+            //md: for example the start of the month and the end of the month,
             let n_ts_ms = new Date(2023, 6, 7, 16, 50, 0);
             let o_ts_range = f_o_ts_range__day__from_n_ts_ms_utc(
                 n_ts_ms
@@ -158,6 +172,7 @@ await f_deno_test_all_and_print_summary(
                 f_s_ymd_hms__from_n_ts_ms_utc(o_end.getTime(), 'UTC'),
                 '2023-07-08 00:00:00', 
             )
+            //./readme.md:end
         }),
         f_deno_test("f_o_ts_range__week__from_n_ts_ms_utc", () => {
             let n_ts_ms = new Date(2022, 11, 26, 16, 50, 0);
@@ -212,6 +227,9 @@ await f_deno_test_all_and_print_summary(
         }),
         
         f_deno_test("f_s_timestring_from_n_ms", () => {
+            //./readme.md:start
+            //md: # get a string formatted depending on the milliseconds length
+            //md: for example 12->12 milliseconds
             f_assert_equals(
                 f_s_timestring_from_n_ms(12, 1),
                 '12.0 Milliseconds',
@@ -232,7 +250,7 @@ await f_deno_test_all_and_print_summary(
                 f_s_timestring_from_n_ms(1.2*1000*60*60*24, 1),
                 '1.2 Days',
             )
-
+            //translations also possible
             let a_s_name_german = [
                 'Millisekunden', 
                 'Sekunden',
@@ -260,15 +278,24 @@ await f_deno_test_all_and_print_summary(
                 f_s_timestring_from_n_ms(1.2*1000*60*60*24, 1, a_s_name_german),
                 '1.2 Tage',
             )
-            
+            //./readme.md:end
         }),
 
+        f_deno_test("f_measure_time", async () => {
+            return new Promise((f_res)=>{
+                //./readme.md:start
+                //md: # a handy function to measure time/diff/delta/ms
+                f_measure_time('my_custom_timer');
+                window.setTimeout(()=>{
+                    f_measure_time();// output: f_measure_time: 'my_custom_timer' diff: 1.24 Seconds
+                    return f_res(true)
+                },1234)
+                //./readme.md:end
+            })
+        })
 
     ]
 )
-
-
-//./readme.md:end
 
 
 console.log("done")

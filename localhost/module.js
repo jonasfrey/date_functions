@@ -330,6 +330,20 @@ let f_s_timestring_from_n_ms = function(
     ].join(' ')
 }
 
+let a_n_ms_ts__for_f_measure_time = []
+let f_measure_time = function(s_prefix =''){
+    if(a_n_ms_ts__for_f_measure_time.length == 0){
+        a_n_ms_ts__for_f_measure_time.push(s_prefix)
+    }
+    a_n_ms_ts__for_f_measure_time.push(window.performance.now())
+    if(a_n_ms_ts__for_f_measure_time.length == 3){
+        let n_diff = Math.abs(a_n_ms_ts__for_f_measure_time[1]-a_n_ms_ts__for_f_measure_time[2])
+        console.log(`f_measure_time: '${a_n_ms_ts__for_f_measure_time[0]}' diff: ${f_s_timestring_from_n_ms(n_diff)}`);
+        a_n_ms_ts__for_f_measure_time = []
+    }
+}
+
+
 export {
     f_b_daylight_saving_time,
     f_s_isotimezone__from_s_timezone,
@@ -344,5 +358,6 @@ export {
     f_o_ts_range__month__from_n_ts_ms_utc, 
     f_o_ts_range__year__from_n_ts_ms_utc, 
     f_s_timestring_from_n_ms,
+    f_measure_time,
     O_ts_range
 }
