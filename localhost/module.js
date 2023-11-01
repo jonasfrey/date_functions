@@ -344,6 +344,65 @@ let f_measure_time = function(s_prefix =''){
 }
 
 
+let f_n_ts_ms__rounded_to = function(
+    n_ts_ms, 
+    s_round_to = 'milliseconds',
+    n_round_to = 10,
+    b_closest = true, 
+    b_round_down = false
+    ){
+    let o_s_round_to_s_name_fun = {
+        'milliseconds': 'setUTCMilliseconds',
+        'seconds': 'setUTCSeconds',
+        'minutes': 'setUTCMinutes',
+        'hours': 'setUTCHours',
+        'days': 'setUTCDate',
+        'months': 'setUTCMonth',
+        'years': 'setUTCFullYear',
+    };
+    let o_date = new Date(n_ts_ms);
+    
+    let s_name_function_set = o_s_round_to_s_name_fun[s_round_to];
+    let s_name_function_get = o_s_round_to_s_name_fun[s_round_to].replace('set', 'get');
+    let n_get = o_date[s_name_function_get]()
+
+    if(s_round_to == 'months'){
+        n_get+=1;
+    }
+    for(let s_round_to2 in o_s_round_to_s_name_fun){
+        if(s_round_to2 == s_round_to){
+            break;
+        }
+        o_date[o_s_round_to_s_name_fun[s_round_to2]](0)
+    };
+
+    let n_unit_factor = n_get/n_round_to;
+    if(b_closest){
+        if((n_unit_factor % 1) < .5){
+            b_round_down = true
+        }
+    }
+    // console.log(n_unit_factor)
+
+    if(b_round_down){
+        n_unit_factor = Math.floor(n_unit_factor)
+    }else{
+        n_unit_factor = Math.ceil(n_unit_factor)
+    }
+    // console.log(n_unit_factor)
+    
+    let n_set = n_unit_factor*n_round_to; 
+    if(s_round_to == 'months'){
+        n_set-=1;
+    }
+    // console.log(n_set)
+    o_date = new Date(o_date[s_name_function_set](n_set));
+    // console.log(o_date.toString())
+    let n_ts_ms_rounded = o_date.getTime()
+
+    return n_ts_ms_rounded
+}
+
 export {
     f_b_daylight_saving_time,
     f_s_isotimezone__from_s_timezone,
@@ -359,5 +418,6 @@ export {
     f_o_ts_range__year__from_n_ts_ms_utc, 
     f_s_timestring_from_n_ms,
     f_measure_time,
-    O_ts_range
+    O_ts_range, 
+    f_n_ts_ms__rounded_to
 }

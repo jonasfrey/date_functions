@@ -22,7 +22,8 @@ import {
     f_o_ts_range__month__from_n_ts_ms_utc,
     f_o_ts_range__year__from_n_ts_ms_utc,
     f_s_timestring_from_n_ms,
-    f_measure_time
+    f_measure_time,
+    f_n_ts_ms__rounded_to
 } from "./module.js"
 
 //md: # usage 
@@ -292,8 +293,87 @@ await f_deno_test_all_and_print_summary(
                 },1234)
                 //./readme.md:end
             })
-        })
+        }),
+        f_deno_test("f_n_ts_ms__rounded_to", async () => {
+            return new Promise((f_res)=>{
+                //./readme.md:start
+                //md: # round a unix timestamp to a given unit 
+                var n_ts_ms_rounded = f_n_ts_ms__rounded_to(
+                    new Date(
+                        Date.UTC(2023, 2, 2, 20, 22, 11, 444)
+                    ).getTime(),
+                    'milliseconds', 
+                    500
+                );
+                f_assert_equals(
+                    n_ts_ms_rounded, 
+                    new Date(
+                        Date.UTC(2023, 2, 2, 20, 22, 11, 500)
+                    ).getTime()
+                )
+                //md: round to '12', (12, 24, 36...) seconds
 
+                f_assert_equals(
+                    f_n_ts_ms__rounded_to(
+                        new Date(Date.UTC(2023, 2, 2, 20, 22, 23)).getTime(),
+                        'seconds', 
+                        12
+                    ), 
+                    new Date(Date.UTC(2023, 2, 2, 20, 22, 24)).getTime()
+                )
+
+                //md: round down every time
+                f_assert_equals(
+                    f_n_ts_ms__rounded_to(
+                        new Date(Date.UTC(2023, 2, 2, 20, 22, 23)).getTime(),
+                        'seconds', 
+                        12,
+                        false,//b_closest 
+                        true// b_round_down
+                    ), 
+                    new Date(Date.UTC(2023, 2, 2, 20, 22, 12)).getTime(), 
+                )
+
+                //md: practical example 
+                f_assert_equals(
+                    f_n_ts_ms__rounded_to(
+                        new Date('2023-03-02 20:22:23').getTime(),
+                        'minutes', 
+                        10
+                    ), 
+                    new Date('2023-03-02 20:20:00').getTime()
+                )
+
+                f_assert_equals(
+                    f_s_ymd_hms__from_n_ts_ms_utc(f_n_ts_ms__rounded_to(
+                        new Date('2023-03-02 20:22:23').getTime(),
+                        'hours', 
+                        6
+                    ), 'UTC'), 
+                    '2023-03-02 18:00:00'
+                )
+                f_assert_equals(
+                    f_s_ymd_hms__from_n_ts_ms_utc(f_n_ts_ms__rounded_to(
+                        new Date('2023-03-17 20:22:23').getTime(),
+                        'days', 
+                        6
+                    ), 'UTC'), 
+                    '2023-03-18 00:00:00'
+                )
+                // f_assert_equals(
+                //     f_s_ymd_hms__from_n_ts_ms_utc(f_n_ts_ms__rounded_to(
+                //         new Date('2023-09-23 20:22:23').getTime(),
+                //         'months', 
+                //         3
+                //     ), 'UTC'), 
+                //     '2023-09-01 00:00:00'
+                // )
+
+
+                //./readme.md:end
+            })
+        })
+        
     ]
 )
 
