@@ -22,7 +22,7 @@ import {
     f_o_ts_range__month__from_n_ts_ms_utc,
     f_o_ts_range__year__from_n_ts_ms_utc,
     f_s_timestring_from_n_ms,
-    f_measure_time,
+    f_n_measure_time,
     f_n_ts_ms__rounded_to
 } from "./module.js"
 
@@ -282,13 +282,19 @@ await f_deno_test_all_and_print_summary(
             //./readme.md:end
         }),
 
-        f_deno_test("f_measure_time", async () => {
+        f_deno_test("f_n_measure_time", async () => {
             return new Promise((f_res)=>{
                 //./readme.md:start
                 //md: # a handy function to measure time/diff/delta/ms
-                f_measure_time('my_custom_timer');
+                f_n_measure_time('my_custom_timer');
                 window.setTimeout(()=>{
-                    f_measure_time();// output: f_measure_time: 'my_custom_timer' diff: 1.24 Seconds
+                    f_n_measure_time();// output: f_n_measure_time: 'my_custom_timer' diff: 1.24 Seconds
+                    return f_res(true)
+                },1234)
+
+                f_n_measure_time();
+                window.setTimeout(()=>{
+                    f_n_measure_time();// output: f_n_measure_time: 'my_custom_timer' diff: 1.24 Seconds
                     return f_res(true)
                 },1234)
                 //./readme.md:end
