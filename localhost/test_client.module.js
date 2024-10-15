@@ -4,10 +4,10 @@
 
 import {
     f_assert_equals, 
-    f_deno_test, 
+    f_deno_test,    
     f_deno_test_summary,
     f_deno_test_all_and_print_summary 
-} from "https://deno.land/x/deno_test_server_and_client_side@0.4/mod.js"
+} from "https://deno.land/x/deno_test_server_and_client_side@2.0.0/mod.js"
 
 import {
     f_b_daylight_saving_time,
@@ -287,13 +287,13 @@ await f_deno_test_all_and_print_summary(
                 //./readme.md:start
                 //md: # a handy function to measure time/diff/delta/ms
                 f_n_measure_time('my_custom_timer');
-                window.setTimeout(()=>{
+                globalThis.setTimeout(()=>{
                     f_n_measure_time();// output: f_n_measure_time: 'my_custom_timer' diff: 1.24 Seconds
                     return f_res(true)
                 },1234)
 
                 f_n_measure_time();
-                window.setTimeout(()=>{
+                globalThis.setTimeout(()=>{
                     f_n_measure_time();// output: f_n_measure_time: 'my_custom_timer' diff: 1.24 Seconds
                     return f_res(true)
                 },1234)
